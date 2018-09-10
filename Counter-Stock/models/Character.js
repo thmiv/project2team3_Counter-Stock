@@ -4,7 +4,6 @@ module.exports = function (sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING,
       allowNull: false
-
     },
     password: {
       type: DataTypes.STRING,
@@ -13,12 +12,9 @@ module.exports = function (sequelize, DataTypes) {
     stockChoice: {
       type: DataTypes.STRING,
       allowNull: false,
-
     },
     stockPrice: {
       type: DataTypes.DECIMAL(10, 2),
-
-
     },
   });
 

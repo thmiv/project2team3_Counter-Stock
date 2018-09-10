@@ -1,7 +1,14 @@
 module.exports = function (sequelize, DataTypes) {
   var Author = sequelize.define("Author", {
-    // Giving the Author model a name of type STRING
-    name: DataTypes.STRING
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   });
 
   Author.associate = function (models) {
