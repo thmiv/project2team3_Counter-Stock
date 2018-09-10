@@ -53,15 +53,15 @@ var refreshCharacters = function () {
     var $character = data.map(function (character) {
       getQuote(character.stockChoice);
       var $a = $("<a>")
-        .text(character.username + " " + character.stockChoice)
-        .attr("href", "/characters/" + character.id);
+        .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
+        .attr("href", "#collapseExample" + character.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
           "data-id": character.id
         })
-        .append($a)
+        .append($a);
 
 
       var $button = $("<button>")
@@ -69,6 +69,12 @@ var refreshCharacters = function () {
         .text("ｘ");
 
       $li.append($button);
+
+      var $fight = $("<br><a>")
+        .text("Fight this guy")
+        .attr("href", "/fight");
+
+      $li.append($fight);
 
       return $li;
 

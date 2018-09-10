@@ -2,18 +2,14 @@
   <div class="row">
     <div class="col-8 offset-2">
       <div class="card mt-4">
-        <div class="card-body">
+        <div class="card-body accordion" id="accordionExample">
           {{!-- <h5 class="card-title">Characters</h5> --}}
           <h3>Current Characters: </h3>
           <ul id="character-list" class="list-group">
             {{#each Characters}}
             <li data-id="{{Characters.id}}" class="list-group-item">
-              <a href="characters/{{Characters.id}}">{{Characters.text}}</a>
+              <a class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{Characters.id}}">{{Characters.text}}</a>
               <button class="btn btn-danger float-right delete">ｘ</button>
-              <p>
-                <strong>Stock: </strong>: {{Characters.stockChoice}}</p>
-              <p>
-                <strong>Stock price: </strong>${{Characters.stockPrice}}</p>
               <a href="/fight" class="btn btn-primary float-right">Battle this guy</a>
             </li>
             {{/each}}
