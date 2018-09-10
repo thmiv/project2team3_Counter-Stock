@@ -3,19 +3,20 @@ module.exports = function (sequelize, DataTypes) {
   var Character = sequelize.define("Character", {
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
 
     },
     stockChoice: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
 
-    },
-    // Can't add another column for some reason
-    stockPrice: {
-      type: DataTypes.STRING,
+    }
+    //   Can't add another column for some reason
+    // stockPrice: {
+    //   type: DataTypes.FLOAT,
+    //   allowNull: false
 
-    },
+    // }
   });
   return Character;
 };

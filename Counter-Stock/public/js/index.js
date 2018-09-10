@@ -60,7 +60,7 @@ var refreshCharacters = function () {
           class: "list-group-item",
           "data-id": character.id
         })
-        .append($a);
+        .append($a)
 
 
       var $button = $("<button>")
@@ -88,7 +88,6 @@ var handleFormSubmit = function (event) {
   var character = {
     username: $characterUsername.val().trim(),
     stockChoice: $characterStock.val().trim(),
-    stockPrice: getQuote($characterStock).val().trim(),
 
   };
   console.log(character);
