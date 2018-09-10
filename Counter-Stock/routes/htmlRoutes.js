@@ -1,9 +1,9 @@
 var db = require("../models");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Character.findAll({}).then(function(dbCharacter) {
+  app.get("/", function (req, res) {
+    db.Character.findAll({}).then(function (dbCharacter) {
       res.render("index", {
         msg: "Welcome!",
         username: dbCharacter.username,
@@ -14,8 +14,8 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/characters/:id", function(req, res) {
-    db.Character.findOne({ where: { id: req.params.id } }).then(function(dbCharacter) {
+  app.get("/characters/:id", function (req, res) {
+    db.Character.findOne({ where: { id: req.params.id } }).then(function (dbCharacter) {
       res.render("characters", {
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice
@@ -23,16 +23,16 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/characters", function(req, res) {
-    db.Character.findAll({}).then(function(dbCharacter) {
+  app.get("/characters", function (req, res) {
+    db.Character.findAll({}).then(function (dbCharacter) {
       res.render("characters", {
         username: dbCharacter.username
       });
     });
   });
 
-  app.get("/fight", function(req, res) {
-    db.Character.findAll({}).then(function(dbCharacter) {
+  app.get("/fight", function (req, res) {
+    db.Character.findAll({}).then(function (dbCharacter) {
       res.render("fight", {
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice,
@@ -42,7 +42,7 @@ module.exports = function(app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
