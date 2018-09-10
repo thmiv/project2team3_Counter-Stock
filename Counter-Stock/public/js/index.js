@@ -91,23 +91,23 @@ var handleFormSubmit = function (event) {
     stockChoice: $characterStock.val().trim(),
     password: $characterPassword.val().trim(),
     stockPrice: getQuote($characterStock.val().trim())
-  
+
   };
-  
+
   if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
-  setTimeout(function(){  
-  
+  setTimeout(function () {
+
     console.log(character);
-    API.saveCharacter(character).then(function() {
+    API.saveCharacter(character).then(function () {
       refreshCharacters();
     });
 
 
   }, 2000);
-  
+
 
   $characterUsername.val("");
   $characterStock.val("");
@@ -121,13 +121,13 @@ var handleDeleteBtnClick = function () {
     .parent()
     .attr("data-id");
 
-    
-      API.deleteCharacter(idToDelete).then(function() {
-        refreshCharacters();
-      });
-      
-   
-    
+
+  API.deleteCharacter(idToDelete).then(function () {
+    refreshCharacters();
+  });
+
+
+
 };
 
 // Add event listeners to the submit and delete buttons
