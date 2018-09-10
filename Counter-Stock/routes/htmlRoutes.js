@@ -31,6 +31,16 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/fight", function(req, res) {
+    db.Character.findAll({}).then(function(dbCharacter) {
+      res.render("fight", {
+        username: dbCharacter.username,
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
+      });
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
