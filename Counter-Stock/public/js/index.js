@@ -96,41 +96,22 @@ var handleFormSubmit = function (event) {
     username: $characterUsername.val().trim(),
     stockChoice: $characterStock.val().trim(),
     password: $characterPassword.val().trim(),
-<<<<<<< HEAD
-    stockPrice: getQuote($characterStock.val().trim())
-
-  };
-
-=======
   
   };
   getQuote1($characterStock.val().trim());
   
   
->>>>>>> master
   if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
-<<<<<<< HEAD
-  setTimeout(function () {
-
-    console.log(character);
-    API.saveCharacter(character).then(function () {
-=======
   
-    API.saveCharacter(character).then(function() {
->>>>>>> master
-      refreshCharacters();
-    });
+    // API.saveCharacter(character).then(function() {
+    //   refreshCharacters();
+    // });
 
 
-<<<<<<< HEAD
-  }, 2000);
-
-=======
   
->>>>>>> master
 
   $characterUsername.val("");
   $characterStock.val("");
