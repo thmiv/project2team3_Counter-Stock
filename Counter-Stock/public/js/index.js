@@ -6,6 +6,7 @@ var $submitBtn = $("#submit");
 var $refreshBtn = $("refresh");
 var $characterList = $("#character-list");
 var quote;
+var character;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -51,7 +52,7 @@ var refreshCharacters = function () {
     // console.log(data);
 
     var $character = data.map(function (character) {
-      getQuote(character.stockChoice);
+      
       var $a = $("<a>")
         .text(character.username + " " + character.stockChoice)
         .attr("href", "/characters/" + character.id);
@@ -85,28 +86,25 @@ var refreshCharacters = function () {
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function (event) {
   event.preventDefault();
-
-  var character = {
+  character = {
     username: $characterUsername.val().trim(),
     stockChoice: $characterStock.val().trim(),
     password: $characterPassword.val().trim(),
-    stockPrice: getQuote($characterStock.val().trim())
   
   };
+  getQuote1($characterStock.val().trim());
+  
   
   if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
-  setTimeout(function(){  
   
-    console.log(character);
     API.saveCharacter(character).then(function() {
       refreshCharacters();
     });
 
 
-  }, 2000);
   
 
   $characterUsername.val("");
@@ -135,3 +133,24 @@ $submitBtn.on("click", handleFormSubmit);
 $characterList.on("click", ".delete", handleDeleteBtnClick);
 // $refreshBtn.on("click",);
 refreshCharacters();
+
+function getQuote1(ticker) {
+  console.log("get quote 1 is working")
+  console.log(ticker)
+  var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(ticker + " price is: " + response);
+    console.log("character is line below");
+    console.log(character);
+    console.log("character is line above");
+    character.stockPrice = response;
+    console.log(character);
+    console.log(response);
+    API.saveCharacter(character).then(function () {
+      refreshCharacters();
+    });
+  });
+}
