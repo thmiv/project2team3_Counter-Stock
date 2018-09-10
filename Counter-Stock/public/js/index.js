@@ -35,17 +35,17 @@ var API = {
 };
 
 // function that gets the real time stock price. cant get it to render to the page because of asynchronous stuff
-function getQuote(ticker) {
+// function getQuote(ticker) {
 
-  var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
-  $.ajax({
-    url: queryURL,
-    method: "GET",
-  }).then(function (response) {
-    console.log(ticker + " price is: " + response);
-    return response;
-  });
-}
+//   var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
+//   $.ajax({
+//     url: queryURL,
+//     method: "GET",
+//   }).then(function (response) {
+//     console.log(ticker + " price is: " + response);
+//     return response;
+//   });
+// }
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshCharacters = function () {
   API.getCharacters().then(function (data) {
@@ -54,7 +54,7 @@ var refreshCharacters = function () {
     var $character = data.map(function (character) {
       
       var $a = $("<a>")
-        .text(character.username + " " + character.stockChoice)
+        .text(character.username + " " + character.stockChoice + " $" + character.stockPrice)
         .attr("href", "/characters/" + character.id);
 
       var $li = $("<li>")
@@ -100,9 +100,9 @@ var handleFormSubmit = function (event) {
     return;
   }
   
-    API.saveCharacter(character).then(function() {
-      refreshCharacters();
-    });
+    // API.saveCharacter(character).then(function() {
+    //   refreshCharacters();
+    // });
 
 
   

@@ -7,7 +7,8 @@ module.exports = function(app) {
       res.render("index", {
         msg: "Welcome!",
         username: dbCharacter.username,
-        stockChoice: dbCharacter.stockChoice
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
         // examples: dbExamples
       });
     });
@@ -18,7 +19,8 @@ module.exports = function(app) {
     db.Character.findOne({ where: { id: req.params.id } }).then(function(dbCharacter) {
       res.render("characters", {
         username: dbCharacter.username,
-        stockChoice: dbCharacter.stockChoice
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
       });
     });
   });
