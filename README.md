@@ -58,3 +58,54 @@ Eric Galassi - .js wizard
 Momin Amad - Creating Database and API 
 Spencer Vigil - Connect front end to back end transition to front end
 Thomas Milnes - Connect front end to back end transition to front end
+
+
+List of Stock Tickers
+
+Highly Volatile:
+
+FRED
+NLST
+RMNI
+BLPH
+NVMM
+RSLS
+TLRY
+PRQR
+NMIH
+SRNE
+
+Top 10 growth this year:
+
+MILN
+JSMD
+ARVR
+SQLV
+BOSS
+TTAC
+JSML
+FLQS
+SCAP
+XITK
+
+Popular 20:
+AAPL
+INTC
+GOOG
+AMZN
+MSFT
+AZO
+PFE
+NFLX
+FB
+BRK-A
+BABA
+JNJ
+JPM
+XOM
+BAC
+WMT
+WFC
+V
+PG
+BUD
