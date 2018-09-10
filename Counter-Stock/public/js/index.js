@@ -32,7 +32,7 @@ var API = {
   }
 };
 
-
+// function that gets the real time stock price. cant get it to render to the page because of asynchronous stuff
 function getQuote(ticker){
   
     var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
