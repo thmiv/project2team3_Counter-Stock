@@ -1,49 +1,67 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $characterUsername = $("#character-username");
+var $characterStock = $("#character-stock");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $refreshBtn = $("refresh");
+var $characterList = $("#character-list");
+var quote;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveCharacter: function(character) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/characters",
+      data: JSON.stringify(character)
     });
   },
-  getExamples: function() {
+  getCharacters: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/characters",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteCharacter: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/characters/" + id,
       type: "DELETE"
     });
   }
 };
 
+
+function getQuote(ticker){
+  
+    var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function(response){
+        console.log(ticker + " price is: " + response);
+        return response;
+      })
+}
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshCharacters = function() {
+  API.getCharacters().then(function(data) {
+    // console.log(data);
+    
+    var $character = data.map(function(character) {
+      getQuote(character.stockChoice);
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text( character.username + " " + character.stockChoice)
+        .attr("href", "/characters/" + character.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": character.id
         })
-        .append($a);
+        .append($a)
+        
 
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
@@ -52,10 +70,13 @@ var refreshExamples = function() {
       $li.append($button);
 
       return $li;
+
+      // })
+     
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $characterList.empty();
+    $characterList.append($character);
   });
 };
 
@@ -64,22 +85,23 @@ var refreshExamples = function() {
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var character = {
+    username: $characterUsername.val().trim(),
+    stockChoice: $characterStock.val().trim(),
+  
   };
-
-  if (!(example.text && example.description)) {
+  console.log(character);
+  if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.saveCharacter(character).then(function() {
+    refreshCharacters();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $characterUsername.val("");
+  $characterStock.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -89,11 +111,13 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteCharacter(idToDelete).then(function() {
+    refreshCharacters();
   });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$characterList.on("click", ".delete", handleDeleteBtnClick);
+// $refreshBtn.on("click",);
+refreshCharacters();
