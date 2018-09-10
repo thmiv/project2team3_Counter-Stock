@@ -35,17 +35,17 @@ var API = {
 };
 
 // function that gets the real time stock price. cant get it to render to the page because of asynchronous stuff
-// function getQuote(ticker) {
+function getQuote(ticker) {
 
-//   var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
-//   $.ajax({
-//     url: queryURL,
-//     method: "GET",
-//   }).then(function (response) {
-//     console.log(ticker + " price is: " + response);
-//     return response;
-//   });
-// }
+  var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(ticker + " price is: " + response);
+    return response;
+  });
+}
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshCharacters = function () {
   API.getCharacters().then(function (data) {
@@ -54,15 +54,15 @@ var refreshCharacters = function () {
     var $character = data.map(function (character) {
       
       var $a = $("<a>")
-        .text(character.username + " " + character.stockChoice + " $" + character.stockPrice)
-        .attr("href", "/characters/" + character.id);
+        .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
+        .attr("href", "#collapseExample" + character.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
           "data-id": character.id
         })
-        .append($a)
+        .append($a);
 
 
       var $button = $("<button>")
@@ -70,6 +70,12 @@ var refreshCharacters = function () {
         .text("ｘ");
 
       $li.append($button);
+
+      var $fight = $("<br><a>")
+        .text("Fight this guy")
+        .attr("href", "/fight");
+
+      $li.append($fight);
 
       return $li;
 
@@ -119,13 +125,13 @@ var handleDeleteBtnClick = function () {
     .parent()
     .attr("data-id");
 
-    
-      API.deleteCharacter(idToDelete).then(function() {
-        refreshCharacters();
-      });
-      
-   
-    
+
+  API.deleteCharacter(idToDelete).then(function () {
+    refreshCharacters();
+  });
+
+
+
 };
 
 // Add event listeners to the submit and delete buttons

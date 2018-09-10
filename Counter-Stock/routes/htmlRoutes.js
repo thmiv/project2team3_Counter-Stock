@@ -28,7 +28,9 @@ module.exports = function(app) {
   app.get("/characters", function(req, res) {
     db.Character.findAll({}).then(function(dbCharacter) {
       res.render("characters", {
-        username: dbCharacter.username
+        username: dbCharacter.username,
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
       });
     });
   });
