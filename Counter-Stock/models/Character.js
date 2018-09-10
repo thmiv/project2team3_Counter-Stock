@@ -4,7 +4,6 @@ module.exports = function (sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING,
       allowNull: false
-
     },
     password: {
       type: DataTypes.STRING,
@@ -13,15 +12,19 @@ module.exports = function (sequelize, DataTypes) {
     stockChoice: {
       type: DataTypes.STRING,
       allowNull: false,
-
     },
-    //   Can't add another column for some reason
     stockPrice: {
       type: DataTypes.DECIMAL(10, 2),
-
-
     },
   });
+
+  Character.associate = function (models) {
+    Character.belongsTo(models.Author, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return Character;
 };
-
