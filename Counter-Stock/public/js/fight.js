@@ -1,6 +1,11 @@
 $(document).ready(function () {
+<<<<<<< HEAD
   // var $characterUsername = $("#character-username");
   // var $characterStock = $("#character-stock");
+=======
+// var $characterUsername = $("#character-username");
+// var $characterStock = $("#character-stock");
+>>>>>>> master
   var $characterPrice = 1000;
   // $("#character-price");
   // var $opponentUsername = $("#opponent-username");
