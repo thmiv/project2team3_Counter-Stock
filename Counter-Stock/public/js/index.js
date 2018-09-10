@@ -9,7 +9,7 @@ var quote;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveCharacter: function(character) {
+  saveCharacter: function (character) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -19,13 +19,13 @@ var API = {
       data: JSON.stringify(character)
     });
   },
-  getCharacters: function() {
+  getCharacters: function () {
     return $.ajax({
       url: "api/characters",
       type: "GET"
     });
   },
-  deleteCharacter: function(id) {
+  deleteCharacter: function (id) {
     return $.ajax({
       url: "api/characters/" + id,
       type: "DELETE"
@@ -34,26 +34,26 @@ var API = {
 };
 
 // function that gets the real time stock price. cant get it to render to the page because of asynchronous stuff
-function getQuote(ticker){
-  
-    var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
-      $.ajax({
-        url: queryURL,
-        method: "GET",
-      }).then(function(response){
-        console.log(ticker + " price is: " + response);
-        return response;
-      })
+function getQuote(ticker) {
+
+  var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/price";
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(ticker + " price is: " + response);
+    return response;
+  });
 }
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshCharacters = function() {
-  API.getCharacters().then(function(data) {
+var refreshCharacters = function () {
+  API.getCharacters().then(function (data) {
     // console.log(data);
-    
-    var $character = data.map(function(character) {
+
+    var $character = data.map(function (character) {
       getQuote(character.stockChoice);
       var $a = $("<a>")
-        .text( character.username + " " + character.stockChoice)
+        .text(character.username + " " + character.stockChoice)
         .attr("href", "/characters/" + character.id);
 
       var $li = $("<li>")
@@ -62,7 +62,7 @@ var refreshCharacters = function() {
           "data-id": character.id
         })
         .append($a)
-        
+
 
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
@@ -73,7 +73,7 @@ var refreshCharacters = function() {
       return $li;
 
       // })
-     
+
     });
 
     $characterList.empty();
@@ -83,7 +83,7 @@ var refreshCharacters = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleFormSubmit = function (event) {
   event.preventDefault();
 
   var character = {
@@ -116,7 +116,7 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");

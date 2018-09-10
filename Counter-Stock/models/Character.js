@@ -1,8 +1,9 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   // makes a basic characters table in game database
   var Character = sequelize.define("Character", {
-    username: {type: DataTypes.STRING,
-              allowNull: false,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
 
           },
     password: {type: DataTypes.STRING,
