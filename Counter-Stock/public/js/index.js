@@ -1,6 +1,7 @@
 // Get references to page elements
 var $characterUsername = $("#character-username");
 var $characterStock = $("#character-stock");
+var $characterPassword = $("#character-password");
 var $submitBtn = $("#submit");
 var $refreshBtn = $("refresh");
 var $characterList = $("#character-list");
@@ -88,20 +89,29 @@ var handleFormSubmit = function(event) {
   var character = {
     username: $characterUsername.val().trim(),
     stockChoice: $characterStock.val().trim(),
+    password: $characterPassword.val().trim(),
+    stockPrice: getQuote($characterStock.val().trim())
   
   };
-  console.log(character);
+  
   if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
+  setTimeout(function(){  
+  
+    console.log(character);
+    API.saveCharacter(character).then(function() {
+      refreshCharacters();
+    });
 
-  API.saveCharacter(character).then(function() {
-    refreshCharacters();
-  });
+
+  }, 2000);
+  
 
   $characterUsername.val("");
   $characterStock.val("");
+  $characterPassword.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -111,9 +121,13 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteCharacter(idToDelete).then(function() {
-    refreshCharacters();
-  });
+    
+      API.deleteCharacter(idToDelete).then(function() {
+        refreshCharacters();
+      });
+      
+   
+    
 };
 
 // Add event listeners to the submit and delete buttons

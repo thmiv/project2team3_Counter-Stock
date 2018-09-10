@@ -5,15 +5,18 @@ module.exports = function(sequelize, DataTypes) {
               allowNull: false,
 
           },
+    password: {type: DataTypes.STRING,
+              allowNull: false
+        },
     stockChoice: {type: DataTypes.STRING,
               allowNull: false,
               
           },
   //   Can't add another column for some reason
-  //   stockPrice: {type: DataTypes.STRING,
-  //     allowNull: false,
+    stockPrice: {type: DataTypes.DECIMAL(10, 2),
       
-  // },
+      
+  },
   });
   return Character;
 };
