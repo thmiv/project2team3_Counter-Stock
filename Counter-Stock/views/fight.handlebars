@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card mt-4">
+                <div id="player" class="card-body">
+                    <p>
+                        <strong>You: </strong>{{this.username}}</p>
+                    <p>
+                        <strong>Stock: </strong>: {{this.stockChoice}}</p>
+                    <p>
+                        <strong>Stock price: </strong>${{this.stockPrice}}</p>
+                    <a href="/">← Back To Home</a>
+                </div>
+                <button id="fight" class="btn btn-primary float-right">FIGHT!</button>
+                <div id="opponent" class="card-body">
+                    <p>
+                        <strong>Them: </strong>{{this.username}}</p>
+                    <p>
+                        <strong>Stock: </strong>: {{this.stockChoice}}</p>
+                    <p>
+                        <strong>Stock price: </strong>${{this.stockPrice}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/fight.js"></script>
