@@ -3,19 +3,27 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    db.Character.findAll({}).then(function(dbCharacters) {
       res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
+        msg: "Welcome!"
+        // examples: dbExamples
       });
     });
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
+  app.get("/characters/:id", function(req, res) {
+    db.Character.findOne({ where: { id: req.params.id } }).then(function(dbCharacter) {
+      res.render("characters", {
+        username: dbCharacter
+      });
+    });
+  });
+
+  app.get("/characters", function(req, res) {
+    db.Character.findAll({}).then(function(dbCharacter) {
+      res.render("characters", {
+        username: dbCharacter
       });
     });
   });
