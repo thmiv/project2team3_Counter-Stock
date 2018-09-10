@@ -54,15 +54,15 @@ var refreshCharacters = function () {
     var $character = data.map(function (character) {
       
       var $a = $("<a>")
-        .text(character.username + " " + character.stockChoice)
-        .attr("href", "/characters/" + character.id);
+        .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
+        .attr("href", "#collapseExample" + character.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
           "data-id": character.id
         })
-        .append($a)
+        .append($a);
 
 
       var $button = $("<button>")
@@ -70,6 +70,12 @@ var refreshCharacters = function () {
         .text("ｘ");
 
       $li.append($button);
+
+      var $fight = $("<br><a>")
+        .text("Fight this guy")
+        .attr("href", "/fight");
+
+      $li.append($fight);
 
       return $li;
 
@@ -90,22 +96,41 @@ var handleFormSubmit = function (event) {
     username: $characterUsername.val().trim(),
     stockChoice: $characterStock.val().trim(),
     password: $characterPassword.val().trim(),
+<<<<<<< HEAD
+    stockPrice: getQuote($characterStock.val().trim())
+
+  };
+
+=======
   
   };
   getQuote1($characterStock.val().trim());
   
   
+>>>>>>> master
   if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
+<<<<<<< HEAD
+  setTimeout(function () {
+
+    console.log(character);
+    API.saveCharacter(character).then(function () {
+=======
   
     API.saveCharacter(character).then(function() {
+>>>>>>> master
       refreshCharacters();
     });
 
 
+<<<<<<< HEAD
+  }, 2000);
+
+=======
   
+>>>>>>> master
 
   $characterUsername.val("");
   $characterStock.val("");
@@ -119,13 +144,13 @@ var handleDeleteBtnClick = function () {
     .parent()
     .attr("data-id");
 
-    
-      API.deleteCharacter(idToDelete).then(function() {
-        refreshCharacters();
-      });
-      
-   
-    
+
+  API.deleteCharacter(idToDelete).then(function () {
+    refreshCharacters();
+  });
+
+
+
 };
 
 // Add event listeners to the submit and delete buttons
