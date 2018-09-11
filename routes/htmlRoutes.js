@@ -44,6 +44,16 @@ module.exports = function(app) {
       });
     });
   });
+  
+  app.get("/fight/:id", function(req, res) {
+    db.Character.findOne({ where: { id: req.params.id } }).then(function(dbCharacter) {
+      res.render("fight", {
+        username: dbCharacter.username,
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
+      });
+    });
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
