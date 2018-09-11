@@ -161,10 +161,11 @@ function getQuote1(ticker) {
   });
 }
 
-var opponentId;
+//THIS IS NOT SAVING BEFORE THE NEW PAGE LOADS
+// var opponentId;
 
-$("a").on("click", function() {
-  opponentId = $(this).attr("data-id");
-});
+// $("a").on("click", function() {
+//   opponentId = $(this).attr("data-id");
+// });
 
-export const opponentId = opponentId;
+// localStorage.setItem("opponentId", opponentId);
