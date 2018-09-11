@@ -1,8 +1,50 @@
 var db = require("../models");
 
 module.exports = function (app) {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   // Load index page
   app.get("/", function (req, res) {
+=======
+
+
+  // Load index page
+  app.get("/", function (req, res) {
+    db.Character.findAll({}).then(function (dbCharacter) {
+      res.render("landing", {
+=======
+
+
+  // Load index page
+  app.get("/", function (req, res) {
+    db.Character.findAll({}).then(function (dbCharacter) {
+      res.render("landing", {
+        msg: "Welcome!",
+        username: dbCharacter.username,
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
+        // examples: dbExamples
+      });
+    });
+  });
+
+  // Load index page
+  app.get("/index", function (req, res) {
+    db.Character.findAll({}).then(function (dbCharacter) {
+      res.render("index", {
+>>>>>>> Stashed changes
+        msg: "Welcome!",
+        username: dbCharacter.username,
+        stockChoice: dbCharacter.stockChoice,
+        stockPrice: dbCharacter.stockPrice
+        // examples: dbExamples
+      });
+    });
+  });
+
+  // Load index page
+  app.get("/index", function (req, res) {
+>>>>>>> Stashed changes
     db.Character.findAll({}).then(function (dbCharacter) {
       res.render("index", {
         msg: "Welcome!",

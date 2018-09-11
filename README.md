@@ -41,6 +41,10 @@ Stage 3:
         
     Back End:
          Create fight logic
+         Add in 
+         Make sure database updates total value daily (daily value will be (previoue days value * %change of stock value) )
+         Create Authenication for log in (Thomas)
+
     
 Stage 4: 
     Test and add in any icebox functionality that we have time for

@@ -16,6 +16,9 @@ module.exports = function (sequelize, DataTypes) {
     stockPrice: {
       type: DataTypes.DECIMAL(10, 2),
     },
+    // totalValue: {
+    //   type: DataTypes.DECIMAL(20, 2),
+    // },
   });
 
   Character.associate = function (models) {
