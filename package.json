@@ -36,5 +36,13 @@
     "test": "test"
   },
   "keywords": [],
-  "author": ""
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ag117/project2team3_Counter-Stock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ag117/project2team3_Counter-Stock/issues"
+  },
+  "homepage": "https://github.com/ag117/project2team3_Counter-Stock#readme"
 }

@@ -160,3 +160,12 @@ function getQuote1(ticker) {
     });
   });
 }
+
+//THIS IS NOT SAVING BEFORE THE NEW PAGE LOADS
+// var opponentId;
+
+// $("a").on("click", function() {
+//   opponentId = $(this).attr("data-id");
+// });
+
+// localStorage.setItem("opponentId", opponentId);
