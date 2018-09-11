@@ -141,20 +141,20 @@ $characterList.on("click", ".delete", handleDeleteBtnClick);
 refreshCharacters();
 
 function getQuote1(ticker) {
-  // console.log("get quote 1 is working")
-  // console.log(ticker)
+  console.log("get quote 1 is working")
+  console.log(ticker)
   var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/quote";
   $.ajax({
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    // console.log(ticker + " price is: " + response);
-    // console.log("character is line below");
-    // console.log(character);
-    // console.log("character is line above");
+    console.log(ticker + " price is: " + response);
+    console.log("character is line below");
+    console.log(character);
+    console.log("character is line above");
     character.stockPrice = response.changePercent;
-    // console.log(character);
-    // console.log(response);
+    console.log(character);
+    console.log(response);
     API.saveCharacter(character).then(function () {
       refreshCharacters();
     });
