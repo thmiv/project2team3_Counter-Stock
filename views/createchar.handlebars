@@ -80,43 +80,4 @@
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-
-<script>
-
-    var $characterStock = $("#character-stock");
-    var $createBtn = $("#create-submit");
-
-    $(document).ready(function () {
-
-        // This file just does a GET request to figure out which user is logged in
-        // and updates the HTML on the page
-        $.get("/api/userdata").then(function (data) {
-            $(".member-name").text(data.username);
-        });
-    });
-
-/*
-    var characterCreator = function (event) {
-        event.preventDefault();
-        character = {
-            username: data.username,
-            stockChoice: $characterStock.val().trim(),
-            password: data.password
-            AuthorId: data.id,
-
-        };
-
-
-        if (!(character.stockChoice)) {
-            alert("You must enter an example text and description!");
-            return;
-        }
-
-        $characterStock.val("");
-    };
- */
-
-    //$createBtn.on("click", characterCreator);
-
-</script>
+<script src="js/createchar.js" ></script>

@@ -24,15 +24,14 @@
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
 
 <script>
-  var loginBtn = $("#login-submit");
+  var $loginBtn = $("#login-submit");
   var usernameInput = $("input#character-username");
   var passwordInput = $("input#character-password");
 
   // When the form is submitted, we validate there's an email and password entered
-  loginBtn.on("click", function (event) {
+  $loginBtn.on("click", function (event) {
     event.preventDefault();
     var userData = {
       username: usernameInput.val().trim(),
