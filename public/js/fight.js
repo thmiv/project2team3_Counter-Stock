@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   var yourValue;
   var theirValue;
-  var youId = 1;
+  var youId = 10;
   var opponentId = localStorage.getItem("opponentId");
   var characterChange;
   var opponentChange;

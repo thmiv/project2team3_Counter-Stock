@@ -52,10 +52,17 @@ var refreshCharacters = function () {
     // console.log(data);
 
     var $character = data.map(function (character) {
-      
+
       var $a = $("<a>")
         .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
-        .attr("href", "#collapseExample" + character.id);
+        .attr({
+          href: "#collapseExample" + character.id,
+          "data-target": "#collapse" + character.id,
+          class: "fight btn btn-link collapsed",
+          type: "button",
+          "data-id": character.id,
+          "data-toggle": "collapse"
+        });
 
       var $li = $("<li>")
         .attr({
@@ -73,7 +80,12 @@ var refreshCharacters = function () {
 
       var $fight = $("<br><a>")
         .text("Fight this guy")
-        .attr("href", "/fight");
+        .attr({
+          href: "/fight",
+          id: "collapse" + character.id,
+          class: "collapse btn btn-primary float-right",
+          "data-parent": "#accordionExample"
+        });
 
       $li.append($fight);
 
@@ -96,22 +108,22 @@ var handleFormSubmit = function (event) {
     username: $characterUsername.val().trim(),
     stockChoice: $characterStock.val().trim(),
     password: $characterPassword.val().trim(),
-  
+
   };
   getQuote1($characterStock.val().trim());
-  
-  
+
+
   if (!(character.username && character.stockChoice)) {
     alert("You must enter an example text and description!");
     return;
   }
-  
-    // API.saveCharacter(character).then(function() {
-    //   refreshCharacters();
-    // });
+
+  // API.saveCharacter(character).then(function() {
+  //   refreshCharacters();
+  // });
 
 
-  
+
 
   $characterUsername.val("");
   $characterStock.val("");
@@ -141,8 +153,8 @@ $characterList.on("click", ".delete", handleDeleteBtnClick);
 refreshCharacters();
 
 function getQuote1(ticker) {
-  console.log("get quote 1 is working")
-  console.log(ticker)
+  console.log("get quote 1 is working");
+  console.log(ticker);
   var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/quote";
   $.ajax({
     url: queryURL,
@@ -162,10 +174,12 @@ function getQuote1(ticker) {
 }
 
 //THIS IS NOT SAVING BEFORE THE NEW PAGE LOADS
-// var opponentId;
+$(document).ready(function () {
+  var opponentId;
 
-// $("a").on("click", function() {
-//   opponentId = $(this).attr("data-id");
-// });
-
-// localStorage.setItem("opponentId", opponentId);
+  $(this).on("click", ".fight", function () {
+    opponentId = $(this).attr("data-id");
+    localStorage.setItem("opponentId", opponentId);
+    console.log(opponentId);
+  });
+});
