@@ -1,39 +1,29 @@
 $(document).ready(function () {
 
-  var yourValue;
-  var theirValue;
-  var youId = 10;
+  var yourValue = 1000;
+  var theirValue = 1000;
+  var youId = localStorage.getItem("youId");
   var opponentId = localStorage.getItem("opponentId");
-  var characterChange;
-  var opponentChange;
+  var characterChange = parseFloat($("#player").attr("data-price"));
+  var opponentChange = parseFloat($("#opponent").attr("data-price"));
 
-  function getPrices1() {
-    $.ajax({
-      method: "GET",
-      url: "/fight/" + youId
-    }).then(function(response) {
-      characterChange = response.stockPrice;
-      yourValue = response.totalValue;
-    });
-  }
+  // function getPrices(opponentId, youId) {
+  //   $.ajax({
+  //     method: "GET",
+  //     url: "/fight/" + opponentId + "/" + youId
+  //   }).then(function (response) {
+  //     opponentChange = response.opponent.stockPrice;
+  //     theirValue = response.opponent.totalValue;
+  //     characterChange = response.character.stockPrice;
+  //     yourValue = response.character.totalValue;
+  //     console.log(response);
+  //   });
+  // }
 
-  function getPrices2() {
-    $.ajax({
-      method: "GET",
-      url: "/fight/" + opponentId
-    }).then(function(response) {
-      opponentChange = response.stockPrice;
-      theirValue = response.totalValue;
-    });
-  }
-
-  getPrices1();
-  getPrices2();
+  // getPrices(opponentId, youId);
 
   yourValue = yourValue * (1 + characterChange);
   theirValue = theirValue * (1 + opponentChange);
-  console.log(yourValue);
-  console.log(theirValue);
 
   function fight() {
     var characterRoll = Math.floor(Math.random() * yourValue);

@@ -2,23 +2,23 @@
     <div class="row">
         <div class="col-8 offset-2">
             <div class="card mt-4">
-                <div id="player" class="card-body">
+                <div class="card-body">
                     <p>
-                        <strong>You: </strong>{{this.username}}</p>
+                        <strong>You: </strong>{{this.character.username}}</p>
                     <p>
-                        <strong>Stock: </strong> {{this.stockChoice}}</p>
-                    <p>
-                        <strong>Stock price: </strong>${{this.stockPrice}}</p>
+                        <strong>Stock: </strong> {{this.character.stockChoice}}</p>
+                    <p id="player" data-price="{{this.character.stockPrice}}">
+                        <strong>Stock price: </strong>${{this.character.stockPrice}}</p>
                     <a href="/">← Back To Home</a>
                 </div>
                 <button id="fight" class="btn btn-primary float-right">FIGHT!</button>
-                <div id="opponent" class="card-body">
+                <div class="card-body">
                     <p>
-                        <strong>Them: </strong>{{this.username}}</p>
+                        <strong>Them: </strong>{{this.opponent.username}}</p>
                     <p>
-                        <strong>Stock: </strong> {{this.stockChoice}}</p>
-                    <p>
-                        <strong>Stock price: </strong>${{this.stockPrice}}</p>
+                        <strong>Stock: </strong> {{this.opponent.stockChoice}}</p>
+                    <p id="opponent" data-price="{{this.opponent.stockPrice}}">
+                        <strong>Stock price: </strong>${{this.opponent.stockPrice}}</p>
                 </div>
             </div>
         </div>
