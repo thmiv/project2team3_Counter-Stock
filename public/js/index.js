@@ -115,16 +115,6 @@ var handleFormSubmit = function (event) {
     alert("You must enter an example text and description!");
     return;
   }
-<<<<<<< HEAD
-=======
-
-  // API.saveCharacter(character).then(function() {
-  //   refreshCharacters();
-  // });
-
-
-
->>>>>>> master
 
   $characterUsername.val("");
   $characterStock.val("");
@@ -170,9 +160,6 @@ function getQuote1(ticker) {
       refreshCharacters();
     });
   });
-<<<<<<< HEAD
-}
-=======
 }
 
 //THIS IS NOT SAVING BEFORE THE NEW PAGE LOADS
@@ -185,4 +172,3 @@ $(document).ready(function () {
     console.log(opponentId);
   });
 });
->>>>>>> master
