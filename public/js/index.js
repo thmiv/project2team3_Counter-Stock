@@ -7,6 +7,7 @@ var $refreshBtn = $("refresh");
 var $characterList = $("#character-list");
 var quote;
 var character;
+var youId = 1;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -52,6 +53,7 @@ var refreshCharacters = function () {
     // console.log(data);
 
     var $character = data.map(function (character) {
+      console.log(character);
 
       var $a = $("<a>")
         .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
@@ -81,7 +83,7 @@ var refreshCharacters = function () {
       var $fight = $("<br><a>")
         .text("Fight this guy")
         .attr({
-          href: "/fight",
+          href: "/fight/" + character.id + "/" + youId,
           id: "collapse" + character.id,
           class: "collapse btn btn-primary float-right",
           "data-parent": "#accordionExample"
@@ -179,7 +181,8 @@ $(document).ready(function () {
 
   $(this).on("click", ".fight", function () {
     opponentId = $(this).attr("data-id");
-    localStorage.setItem("opponentId", opponentId);
+    window.localStorage.setItem("opponentId", opponentId);
+    window.localStorage.setItem("youId", "1");
     console.log(opponentId);
   });
 });
