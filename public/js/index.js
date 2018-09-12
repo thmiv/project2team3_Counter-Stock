@@ -79,8 +79,6 @@ var refreshCharacters = function () {
 
       return $li;
 
-      // })
-
     });
 
     $characterList.empty();
@@ -105,13 +103,6 @@ var handleFormSubmit = function (event) {
     alert("You must enter an example text and description!");
     return;
   }
-  
-    // API.saveCharacter(character).then(function() {
-    //   refreshCharacters();
-    // });
-
-
-  
 
   $characterUsername.val("");
   $characterStock.val("");
@@ -130,8 +121,6 @@ var handleDeleteBtnClick = function () {
     refreshCharacters();
   });
 
-
-
 };
 
 // Add event listeners to the submit and delete buttons
@@ -141,8 +130,8 @@ $characterList.on("click", ".delete", handleDeleteBtnClick);
 refreshCharacters();
 
 function getQuote1(ticker) {
-  console.log("get quote 1 is working")
-  console.log(ticker)
+  console.log("get quote 1 is working");
+  console.log(ticker);
   var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/quote";
   $.ajax({
     url: queryURL,

@@ -4,7 +4,7 @@
             <div class="col-8 offset-2">
                 <h1>{{msg}}</h1>
                 <h2>This is our Home Page!</h2>
-                 <h3 style="color:azure">Welcome, <span class="member-name"></span>!</h3>
+                <h3 style="color:azure">Welcome, <span class="member-name"></span>!</h3>
                 <form class="clearfix mb-4" action="POST">
                     <div class="form-group">
                         <label for="character-stock">Stock Choice</label>
@@ -58,21 +58,22 @@
                     <a href="/characters">See the other characters</a>
                 </form>
                 <div class="card-body accordion" id="accordionExample">
-          {{!-- <h5 class="card-title">Characters</h5> --}}
-          <h3>Current Characters: </h3>
-          <ul id="character-list" class="list-group">
-            {{#each Characters}}
-            <li data-id="{{Characters.id}}" class="list-group-item">
-              <a class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{Characters.id}}">{{Characters.text}}</a>
-              <button class="btn btn-danger float-right delete">ｘ</button>
-              <a href="/fight" class="btn btn-primary float-right">Battle this guy</a>
-            </li>
-            {{/each}}
-          </ul>
-          {{!-- <p>
-            <strong>Description:</strong> {{example.description}}</p> --}}
-          <a href="/index">← Back To Login</a> <a class="navbar-brand" href="/logout" style="float:right"> Logout </a>
-        </div>
+                    {{!-- <h5 class="card-title">Characters</h5> --}}
+                    <h3>Current Characters: </h3>
+                    <ul id="character-list" class="list-group">
+                        {{#each Characters}}
+                        <li data-id="{{Characters.id}}" class="list-group-item">
+                            <a class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{Characters.id}}">{{Characters.text}}</a>
+                            <button class="btn btn-danger float-right delete">ｘ</button>
+                            <a href="/fight" class="btn btn-primary float-right">Battle this guy</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{!-- <p>
+                        <strong>Description:</strong> {{example.description}}</p> --}}
+                    <a href="/index">← Back To Login</a> <a class="navbar-brand" href="/logout" style="float:right">
+                        Logout </a>
+                </div>
             </div>
         </div>
     </div>
@@ -82,7 +83,12 @@
 <script src="/js/index.js"></script>
 
 <script>
+
+    var $characterStock = $("#character-stock");
+    var $createBtn = $("#create-submit");
+
     $(document).ready(function () {
+
         // This file just does a GET request to figure out which user is logged in
         // and updates the HTML on the page
         $.get("/api/userdata").then(function (data) {
@@ -90,31 +96,27 @@
         });
     });
 
+/*
     var characterCreator = function (event) {
         event.preventDefault();
         character = {
-            username: $characterUsername.val().trim(),
+            username: data.username,
             stockChoice: $characterStock.val().trim(),
-            password: $characterPassword.val().trim(),
+            password: data.password
+            AuthorId: data.id,
 
         };
-        getQuote1($characterStock.val().trim());
 
 
-        if (!(character.username && character.stockChoice)) {
+        if (!(character.stockChoice)) {
             alert("You must enter an example text and description!");
             return;
         }
 
-        // API.saveCharacter(character).then(function() {
-        //   refreshCharacters();
-        // });
-
-
-
-
-        $characterUsername.val("");
         $characterStock.val("");
-        $characterPassword.val("");
     };
+ */
+
+    //$createBtn.on("click", characterCreator);
+
 </script>
