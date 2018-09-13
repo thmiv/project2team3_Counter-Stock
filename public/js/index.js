@@ -93,8 +93,6 @@ var refreshCharacters = function () {
 
       return $li;
 
-      // })
-
     });
 
     $characterList.empty();
@@ -120,13 +118,6 @@ var handleFormSubmit = function (event) {
     return;
   }
 
-  // API.saveCharacter(character).then(function() {
-  //   refreshCharacters();
-  // });
-
-
-
-
   $characterUsername.val("");
   $characterStock.val("");
   $characterPassword.val("");
@@ -143,8 +134,6 @@ var handleDeleteBtnClick = function () {
   API.deleteCharacter(idToDelete).then(function () {
     refreshCharacters();
   });
-
-
 
 };
 
