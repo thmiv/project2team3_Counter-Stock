@@ -19,6 +19,7 @@ $(document).ready(function () {
             youId = data[0].id;
             localStorage.setItem("youId", youId);
         });
+        refreshCharacters();
     });
 });
 
@@ -160,7 +161,7 @@ $createBtn.on("click", characterCreator);
 
 $(document).ready(function () {
     var opponentId;
-
+    refreshCharacters();
     $(this).on("click", ".fight", function () {
         opponentId = $(this).attr("data-id");
         window.localStorage.setItem("opponentId", opponentId);
