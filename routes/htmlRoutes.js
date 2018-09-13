@@ -49,7 +49,7 @@ module.exports = function (app) {
         msg: "Welcome!",
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice,
-        stockPrice: (1000 * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
+        stockPrice: (dbCharacter.totalValue * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
         // examples: dbExamples
       });
     });
@@ -97,7 +97,7 @@ module.exports = function (app) {
       res.render("fight", {
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice,
-        stockPrice: (1000 * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
+        stockPrice: (dbCharacter.totalValue * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
       });
     });
   });
@@ -119,12 +119,11 @@ module.exports = function (app) {
           character: {
             username: dbCharacter.username,
             stockChoice: dbCharacter.stockChoice,
-            stockPrice: (1000 * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
-          },
-          opponent: {
+            stockPrice: (dbCharacter.totalValue * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
+          }, opponent: {
             username: dbOpponent.username,
             stockChoice: dbOpponent.stockChoice,
-            stockPrice: (1000 * (1 + parseFloat(dbOpponent.stockPrice))).toFixed(2)
+            stockPrice: (dbOpponent.totalValue * (1 + parseFloat(dbOpponent.stockPrice))).toFixed(2)
           }
         });
       });

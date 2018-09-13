@@ -63,9 +63,15 @@ var API = {
             type: "GET"
         });
     },
+<<<<<<< HEAD
     getAuthorCharacters: function (id) {
         return $.ajax({
             url: "api/authors/" + id,
+=======
+    getAuthor: function (id) {
+        return $.ajax({
+            url: "api/characters/" + id,
+>>>>>>> master
             type: "GET"
         });
     },
@@ -85,7 +91,7 @@ var refreshCharacters = function () {
         var $character = data.map(function (character) {
 
             var $a = $("<a>")
-                .text(character.username + " " + character.stockChoice + " $" + (1000 * (1 + parseFloat(character.stockPrice))).toFixed(2))
+                .text(character.username + " " + character.stockChoice + " $" + (character.totalValue * (1 + parseFloat(character.stockPrice))).toFixed(2))
                 .attr({
                     href: "#collapseExample" + character.id,
                     "data-target": "#collapse" + character.id,
