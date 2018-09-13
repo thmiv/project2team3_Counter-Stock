@@ -66,6 +66,14 @@ module.exports = function(app) {
     });
   });
 
+  // get Author characters by ID
+  app.get("/api/authors/:id", function(req, res) {
+    //console.log("AuthorId: req.params.id: ", req.params.id, "***************reqparamsid");
+    db.Character.findAll({where: { AuthorId: req.params.id } }).then(function(dbCharacters) {
+      res.json(dbCharacters);
+    });
+  });
+
   // Create a new example
   app.post("/api/characters", function(req, res) {
     db.Character.create(req.body).then(function(dbCharacters) {
@@ -82,3 +90,4 @@ module.exports = function(app) {
   });
 
 };
+

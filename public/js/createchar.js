@@ -2,13 +2,22 @@ var $characterStock = $("#character-stock");
 var $createBtn = $("#create-submit");
 var $characterList = $("#character-list");
 var character;
-var youId = 1;
+var youId = 0;
 
 $(document).ready(function () {
+    var dId;
     // This file just does a GET request to figure out which user is logged in
     // and updates the HTML on the page
     $.get("/api/userdata").then(function (data) {
         $(".member-name").text(data.username);
+        dId = data.id;
+        //console.log("dIdstart**********************", dId, "dIdend*********************");
+    }).then(function() {
+        API.getAuthorCharacters(dId).then(function(data) {
+            //console.log("data**********************", data, "data*********************");
+            youId = data[0].id;
+            localStorage.setItem("youId", youId);
+        });
     });
 });
 
@@ -22,7 +31,7 @@ var characterCreator = function (event) {
             stockChoice: tickerChar,
             password: data.password,
             AuthorId: data.id
-        }
+        };
     });
 
     getQuote1(tickerChar);
@@ -51,6 +60,12 @@ var API = {
     getCharacters: function () {
         return $.ajax({
             url: "api/characters",
+            type: "GET"
+        });
+    },
+    getAuthorCharacters: function (id) {
+        return $.ajax({
+            url: "api/authors/" + id,
             type: "GET"
         });
     },
