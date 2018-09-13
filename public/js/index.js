@@ -53,8 +53,7 @@ var refreshCharacters = function () {
     // console.log(data);
 
     var $character = data.map(function (character) {
-      console.log(character);
-
+      //console.log(character);
       var $a = $("<a>")
         .text(character.username + " " + character.stockChoice + " " + (1000 * (1 + parseFloat(character.stockPrice))).toFixed(2))
         .attr({
