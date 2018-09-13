@@ -54,6 +54,12 @@ var API = {
             type: "GET"
         });
     },
+    getAuthor: function (id) {
+        return $.ajax({
+            url: "api/characters/" + id,
+            type: "GET"
+        });
+    },
     deleteCharacter: function (id) {
         return $.ajax({
             url: "api/characters/" + id,
@@ -70,7 +76,7 @@ var refreshCharacters = function () {
         var $character = data.map(function (character) {
 
             var $a = $("<a>")
-                .text(character.username + " " + character.stockChoice + " $" + (1000 * (1 + parseFloat(character.stockPrice))).toFixed(2))
+                .text(character.username + " " + character.stockChoice + " $" + (character.totalValue * (1 + parseFloat(character.stockPrice))).toFixed(2))
                 .attr({
                     href: "#collapseExample" + character.id,
                     "data-target": "#collapse" + character.id,
