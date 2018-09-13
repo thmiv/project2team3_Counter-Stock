@@ -63,15 +63,9 @@ var API = {
             type: "GET"
         });
     },
-<<<<<<< HEAD
     getAuthorCharacters: function (id) {
         return $.ajax({
             url: "api/authors/" + id,
-=======
-    getAuthor: function (id) {
-        return $.ajax({
-            url: "api/characters/" + id,
->>>>>>> master
             type: "GET"
         });
     },
