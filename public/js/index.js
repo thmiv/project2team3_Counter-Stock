@@ -7,7 +7,7 @@ var $refreshBtn = $("refresh");
 var $characterList = $("#character-list");
 var quote;
 var character;
-var youId = 1;
+var youId;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -78,6 +78,8 @@ var refreshCharacters = function () {
         .text("ｘ");
 
       $li.append($button);
+
+      youId = localStorage.getItem("youId");
 
       var $fight = $("<br><a>")
         .text("Fight this guy")
@@ -169,7 +171,6 @@ $(document).ready(function () {
   $(this).on("click", ".fight", function () {
     opponentId = $(this).attr("data-id");
     window.localStorage.setItem("opponentId", opponentId);
-    window.localStorage.setItem("youId", "1");
     console.log(opponentId);
   });
 });
