@@ -4,33 +4,46 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
   // AUTH ROUTES****************************************************
-  app.get("/signup", function(req, res) {
-    console.log("req start ***********************", req.user, "req end **********************");
+  app.get("/signup", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      return res.redirect("/members");
     }
     res.render("signup");
   });
 
-  app.get("/login", function(req, res) {
+  app.get("/login", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      return res.redirect("/members");
     }
     res.render("index");
   });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/members", isAuthenticated, function(req, res) {
-    res.render("createchar");
+  app.get("/members", isAuthenticated, function (req, res) {
+   
+    db.Character.findAll({
+      where: {
+        AuthorId: req.user.id
+      }
+    }).then(function (dbCharacter) {
+      res.render("createchar", {
+        username: dbCharacter.username,
+        stockChoice: dbCharacter.stockChoice
+      });
+    });
+
   });
 
 
   // GAME ROUTES*****************************************************
   // Load index page
   app.get("/", function (req, res) {
+    if (req.user) {
+      return res.redirect("/members");
+    }
     db.Character.findAll({}).then(function (dbCharacter) {
       res.render("landing", {
         msg: "Welcome!",
@@ -44,6 +57,9 @@ module.exports = function (app) {
 
   // Load index page
   app.get("/index", function (req, res) {
+    if (req.user) {
+      return res.redirect("/members");
+    }
     db.Character.findAll({}).then(function (dbCharacter) {
       res.render("index", {
         msg: "Welcome!",
@@ -56,7 +72,11 @@ module.exports = function (app) {
 
   // Load example page and pass in an example by id
   app.get("/characters/:id", function (req, res) {
-    db.Character.findOne({ where: { id: req.params.id } }).then(function (dbCharacter) {
+    db.Character.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbCharacter) {
       res.render("characters", {
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice
@@ -64,7 +84,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/characters", function (req, res) {
+  app.get("/characters", isAuthenticated, function (req, res) {
     db.Character.findAll({}).then(function (dbCharacter) {
       res.render("characters", {
         username: dbCharacter.username
@@ -85,14 +105,23 @@ module.exports = function (app) {
   //THIS IS THE GET FROM THE DATABASE TO RETRIEVE THE STATS FOR EACH CHARACTER BEFORE THE FIGHT
   app.get("/fight/:id1/:id2", function (req, res) {
 
-    db.Character.findOne({ where: { id: req.params.id1 } }).then(function (dbOpponent) {
-      db.Character.findOne({ where: { id: req.params.id2 } }).then(function (dbCharacter) {
+    db.Character.findOne({
+      where: {
+        id: req.params.id1
+      }
+    }).then(function (dbOpponent) {
+      db.Character.findOne({
+        where: {
+          id: req.params.id2
+        }
+      }).then(function (dbCharacter) {
         res.render("fight", {
           character: {
             username: dbCharacter.username,
             stockChoice: dbCharacter.stockChoice,
             stockPrice: dbCharacter.stockPrice
-          }, opponent: {
+          },
+          opponent: {
             username: dbOpponent.username,
             stockChoice: dbOpponent.stockChoice,
             stockPrice: dbOpponent.stockPrice

@@ -1,5 +1,6 @@
 var $characterStock = $("#character-stock");
 var $createBtn = $("#create-submit");
+var $characterList = $("#character-list");
 var character;
 
 $(document).ready(function () {
