@@ -18,6 +18,7 @@
           <button id="login-submit" class="btn btn-primary float-right">Login</button>
           <a href="/characters">See the other characters</a>
         </form>
+        <a href="/signup">Sign UP!</a>
       </div>
     </div>
   </div>
@@ -51,11 +52,20 @@
     $.post("/api/login", {
       username: username,
       password: password
-    }).then(function(data) {
+    }).then(function (data) {
       window.location.replace(data);
       // If there's an error, log the error
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.log(err);
+    });
+  }
+
+  function getStoreUser() {
+    $.get("/api/userdata").then(function (uData) {
+      var currentUser = uData;
+      console.log(")))))))))))))))))))))))))", currentUser, "(((((((((((((((((((((((((((((((((((");
+      localStorage.setItem("user_data_name", currentUser.username);
+      localStorage.setItem("user_data_pass", currentUser.password);
     });
   }
 
