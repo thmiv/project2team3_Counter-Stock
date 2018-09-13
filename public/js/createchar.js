@@ -2,6 +2,7 @@ var $characterStock = $("#character-stock");
 var $createBtn = $("#create-submit");
 var $characterList = $("#character-list");
 var character;
+var youId = 1;
 
 $(document).ready(function () {
     // This file just does a GET request to figure out which user is logged in
@@ -69,7 +70,7 @@ var refreshCharacters = function () {
         var $character = data.map(function (character) {
 
             var $a = $("<a>")
-                .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
+                .text(character.username + " " + character.stockChoice + " $" + (1000 * (1 + parseFloat(character.stockPrice))).toFixed(2))
                 .attr({
                     href: "#collapseExample" + character.id,
                     "data-target": "#collapse" + character.id,
@@ -96,7 +97,7 @@ var refreshCharacters = function () {
             var $fight = $("<br><a>")
                 .text("Fight this guy")
                 .attr({
-                    href: "/fight",
+                    href: "/fight/" + character.id + "/" + youId,
                     id: "collapse" + character.id,
                     class: "collapse btn btn-primary float-right",
                     "data-parent": "#accordionExample"
@@ -140,3 +141,14 @@ function getQuote1(ticker) {
 // HANDLERS ***********************************************************
 
 $createBtn.on("click", characterCreator);
+
+$(document).ready(function () {
+    var opponentId;
+  
+    $(this).on("click", ".fight", function () {
+      opponentId = $(this).attr("data-id");
+      window.localStorage.setItem("opponentId", opponentId);
+      window.localStorage.setItem("youId", "1");
+      console.log(opponentId);
+    });
+  });
