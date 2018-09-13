@@ -56,7 +56,7 @@ var refreshCharacters = function () {
       console.log(character);
 
       var $a = $("<a>")
-        .text(character.username + " " + character.stockChoice + " " + character.stockPrice)
+        .text(character.username + " " + character.stockChoice + " " + (1000 * (1 + parseFloat(character.stockPrice))).toFixed(2))
         .attr({
           href: "#collapseExample" + character.id,
           "data-target": "#collapse" + character.id,
