@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   var yourValue = 1000;
   var theirValue = 1000;
-  var youId = 1;
+  var youId = localStorage.getItem("youId");
   var opponentId = localStorage.getItem("opponentId");
   var characterValue = parseFloat($("#player").attr("data-price"));
   var opponentValue = parseFloat($("#opponent").attr("data-price"));
