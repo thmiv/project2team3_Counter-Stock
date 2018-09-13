@@ -24,7 +24,7 @@ module.exports = function (app) {
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function (req, res) {
-   
+
     db.Character.findAll({
       where: {
         AuthorId: req.user.id
@@ -50,7 +50,7 @@ module.exports = function (app) {
         msg: "Welcome!",
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice,
-        stockPrice: (1000 * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
+        stockPrice: (dbCharacter.totalValue * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
         // examples: dbExamples
       });
     });
@@ -98,7 +98,7 @@ module.exports = function (app) {
       res.render("fight", {
         username: dbCharacter.username,
         stockChoice: dbCharacter.stockChoice,
-        stockPrice: (1000 * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
+        stockPrice: (dbCharacter.totalValue * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
       });
     });
   });
@@ -120,11 +120,11 @@ module.exports = function (app) {
           character: {
             username: dbCharacter.username,
             stockChoice: dbCharacter.stockChoice,
-            stockPrice: (1000 * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
+            stockPrice: (dbCharacter.totalValue * (1 + parseFloat(dbCharacter.stockPrice))).toFixed(2)
           }, opponent: {
             username: dbOpponent.username,
             stockChoice: dbOpponent.stockChoice,
-            stockPrice: (1000 * (1 + parseFloat(dbOpponent.stockPrice))).toFixed(2)
+            stockPrice: (dbOpponent.totalValue * (1 + parseFloat(dbOpponent.stockPrice))).toFixed(2)
           }
         });
       });
