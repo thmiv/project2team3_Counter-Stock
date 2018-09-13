@@ -5,6 +5,10 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
   // AUTH ROUTES****************************************************
   app.get("/signup", function (req, res) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     // If the user already has an account send them to the members page
     if (req.user) {
       return res.redirect("/members");
