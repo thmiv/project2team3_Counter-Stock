@@ -6,8 +6,29 @@ module.exports = function (sequelize, DataTypes) {
   var Author = sequelize.define("Author", {
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      validate: {
+        isUnique: function (value, next) {
+
+          Author.find({
+              where: {
+                username: value
+              },
+              attributes: ['id']
+            })
+            .done(function (error, user) {
+              if (error)
+                // Some unexpected error occured with the find method.
+                return next(error);
+              if (user)
+                // We found a user with this email address.
+                // Pass the error to the next method.
+                return next('Email address already in use!');
+              // If we got this far, the email address hasn't been used yet.
+              // Call next with no arguments when validation is successful.
+              next();
+            });
+        }
+      }
     },
     password: {
       type: DataTypes.STRING,

@@ -2,13 +2,24 @@ var $characterStock = $("#character-stock");
 var $createBtn = $("#create-submit");
 var $characterList = $("#character-list");
 var character;
-var youId = 1;
+var youId;
+var charId;
 
 $(document).ready(function () {
+    var dId;
     // This file just does a GET request to figure out which user is logged in
     // and updates the HTML on the page
     $.get("/api/userdata").then(function (data) {
         $(".member-name").text(data.username);
+        dId = data.id;
+        //console.log("dIdstart**********************", dId, "dIdend*********************");
+    }).then(function () {
+        API.getAuthorCharacters(dId).then(function (data) {
+            //console.log("data**********************", data, "data*********************");
+            youId = data[0].id;
+            localStorage.setItem("youId", youId);
+        });
+        refreshCharacters();
     });
 });
 
@@ -22,7 +33,7 @@ var characterCreator = function (event) {
             stockChoice: tickerChar,
             password: data.password,
             AuthorId: data.id
-        }
+        };
     });
 
     getQuote1(tickerChar);
@@ -54,6 +65,12 @@ var API = {
             type: "GET"
         });
     },
+    getAuthorCharacters: function (id) {
+        return $.ajax({
+            url: "api/authors/" + id,
+            type: "GET"
+        });
+    },
     deleteCharacter: function (id) {
         return $.ajax({
             url: "api/characters/" + id,
@@ -70,7 +87,7 @@ var refreshCharacters = function () {
         var $character = data.map(function (character) {
 
             var $a = $("<a>")
-                .text(character.username + " " + character.stockChoice + " $" + (1000 * (1 + parseFloat(character.stockPrice))).toFixed(2))
+                .text(character.username + " " + character.stockChoice + " $" + (character.totalValue * (1 + parseFloat(character.stockPrice))).toFixed(2))
                 .attr({
                     href: "#collapseExample" + character.id,
                     "data-target": "#collapse" + character.id,
@@ -93,11 +110,11 @@ var refreshCharacters = function () {
                 .text("ｘ");
 
             $li.append($button);
-
+            charId = localStorage.getItem("youId");
             var $fight = $("<br><a>")
                 .text("Fight this guy")
                 .attr({
-                    href: "/fight/" + character.id + "/" + youId,
+                    href: "/fight/" + character.id + "/" + charId,
                     id: "collapse" + character.id,
                     class: "collapse btn btn-primary float-right",
                     "data-parent": "#accordionExample"
@@ -144,11 +161,10 @@ $createBtn.on("click", characterCreator);
 
 $(document).ready(function () {
     var opponentId;
-  
+    refreshCharacters();
     $(this).on("click", ".fight", function () {
-      opponentId = $(this).attr("data-id");
-      window.localStorage.setItem("opponentId", opponentId);
-      window.localStorage.setItem("youId", "1");
-      console.log(opponentId);
+        opponentId = $(this).attr("data-id");
+        window.localStorage.setItem("opponentId", opponentId);
+        console.log(opponentId);
     });
-  });
+});
