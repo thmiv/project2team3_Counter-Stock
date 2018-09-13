@@ -44,6 +44,7 @@ var characterCreator = function (event) {
     // }
 
     $characterStock.val("");
+    refreshCharacters();
 };
 
 // copied functions *************************************************************** //
