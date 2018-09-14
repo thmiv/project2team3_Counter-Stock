@@ -1,14 +1,13 @@
-var $characterStock = $("#character-stock");
-var $createBtn = $("#create-submit");
-var $characterList = $("#character-list");
+const $characterStock = $("#character-stock");
+const $createBtn = $("#create-submit");
+const $characterList = $("#character-list");
 var character;
+var opponentId;
 var youId;
 var charId;
 
-$(document).ready(function () {
+var getUserData = function () {
     var dId;
-    // This file just does a GET request to figure out which user is logged in
-    // and updates the HTML on the page
     $.get("/api/userdata").then(function (data) {
         $(".member-name").text(data.username);
         dId = data.id;
@@ -19,9 +18,10 @@ $(document).ready(function () {
             youId = data[0].id;
             localStorage.setItem("youId", youId);
         });
+    }).then(function() {
         refreshCharacters();
     });
-});
+};
 
 var characterCreator = function (event) {
     event.preventDefault();
@@ -44,6 +44,7 @@ var characterCreator = function (event) {
     // }
 
     $characterStock.val("");
+    getUserData();
 };
 
 // copied functions *************************************************************** //
@@ -131,9 +132,6 @@ var refreshCharacters = function () {
     });
 }
 
-//does something?
-refreshCharacters();
-
 function getQuote1(ticker) {
     console.log("get quote 1 is working");
     console.log(ticker);
@@ -159,12 +157,14 @@ function getQuote1(ticker) {
 
 $createBtn.on("click", characterCreator);
 
+$(this).on("click", ".fight", function () {
+    opponentId = $(this).attr("data-id");
+    window.localStorage.setItem("opponentId", opponentId);
+    console.log(opponentId);
+});
+
 $(document).ready(function () {
-    var opponentId;
-    refreshCharacters();
-    $(this).on("click", ".fight", function () {
-        opponentId = $(this).attr("data-id");
-        window.localStorage.setItem("opponentId", opponentId);
-        console.log(opponentId);
-    });
+
+    getUserData();
+   
 });
