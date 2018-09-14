@@ -1,5 +1,6 @@
 # project2team3
-GO TEAM 3
+
+[Counter-Stock](https://hidden-fortress-38316.herokuapp.com/ "Deployed Version of App")
 
 Proposal:
 
