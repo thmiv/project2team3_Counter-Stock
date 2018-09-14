@@ -1,6 +1,6 @@
 # project2team3
 
-[Counter-Stock](https://hidden-fortress-38316.herokuapp.com/ "Deployed Version of App")
+[Counter-Stock Deployed Site](https://hidden-fortress-38316.herokuapp.com/ "Deployed Version of App")
 
 Proposal:
 
